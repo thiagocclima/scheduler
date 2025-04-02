@@ -4,6 +4,6 @@ import java.math.BigDecimal;
 
 public abstract class FixedPeriodFee implements Fee {
 
-	protected abstract BigDecimal getPercentTax();
+	public abstract BigDecimal getPercentTax();
 
 }
