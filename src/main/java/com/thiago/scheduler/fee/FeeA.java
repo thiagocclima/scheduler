@@ -10,9 +10,7 @@ public class FeeA extends FixedPeriodFee {
 
 	@Override
 	public BigDecimal calculate(BigDecimal amount) {
-		if (Objects.isNull(amount) || amount.compareTo(BigDecimal.ZERO) < 0) {
-			throw new IllegalArgumentException("Amount must be not null and greater than zero");
-		}
+		validateAmount(amount);
 		return amount
 				.multiply(percentTax.divide(new BigDecimal(100)))
 				.add(preFixedTax);
