@@ -1,6 +1,7 @@
 package com.thiago.scheduler.fee;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class FeeA extends FixedPeriodFee {
 
@@ -9,7 +10,12 @@ public class FeeA extends FixedPeriodFee {
 
 	@Override
 	public BigDecimal calculate(BigDecimal amount) {
-		return amount.multiply(percentTax.divide(new BigDecimal(100))).add(preFixedTax);
+		if (Objects.isNull(amount) || amount.compareTo(BigDecimal.ZERO) < 0) {
+			throw new IllegalArgumentException("Amount must be not null and greater than zero");
+		}
+		return amount
+				.multiply(percentTax.divide(new BigDecimal(100)))
+				.add(preFixedTax);
 	}
 
 	@Override
