@@ -3,11 +3,12 @@ package com.thiago.scheduler.fee;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public abstract class FixedPeriodFee implements FeeCalculator {
+public abstract class PeriodDependentFee implements FeeCalculator {
 
-	@Override
-	public BigDecimal getValue(BigDecimal amount) {
-		return BigDecimal.ZERO;
+	protected final int daysBetween;
+
+	public PeriodDependentFee(int daysBetween) {
+		this.daysBetween = daysBetween;
 	}
 
 	public void validateAmount(BigDecimal amount) {

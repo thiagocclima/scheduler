@@ -12,7 +12,7 @@ public class FeeATest {
 	@Test
 	public void shouldCalculateFeeEqualToo6() {
 		FeeA feeA = new FeeA();
-		BigDecimal feeToPay = feeA.calculate(new BigDecimal(100));
+		BigDecimal feeToPay = feeA.getValue(new BigDecimal(100));
 
 		assertEquals(new BigDecimal("6.00"), feeToPay);
 	}
@@ -20,14 +20,14 @@ public class FeeATest {
 	@Test
 	public void shouldNotCalculateForNullAmount() {
 		FeeA feeA = new FeeA();
-		Assertions.assertThrows(IllegalArgumentException.class, () -> feeA.calculate(null));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> feeA.getValue(null));
 	}
 
 	@Test
 	void shouldNotCalculateForNegativeAmount() {
 		FeeA feeA = new FeeA();
 		BigDecimal amount = new BigDecimal(-100);
-		Assertions.assertThrows(IllegalArgumentException.class, () -> feeA.calculate(amount));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> feeA.getValue(amount));
 	}
 
 	@Test
@@ -35,7 +35,7 @@ public class FeeATest {
 		FeeA feeA = new FeeA();
 		BigDecimal amount = new BigDecimal("50.5");
 		BigDecimal expected = new BigDecimal("4.515"); // 50.5 * 0.03 + 3
-		assertEquals(expected.setScale(3, BigDecimal.ROUND_HALF_UP), feeA.calculate(amount).setScale(3, BigDecimal.ROUND_HALF_UP));
+		assertEquals(expected.setScale(3, BigDecimal.ROUND_HALF_UP), feeA.getValue(amount).setScale(3, BigDecimal.ROUND_HALF_UP));
 	}
 
 }

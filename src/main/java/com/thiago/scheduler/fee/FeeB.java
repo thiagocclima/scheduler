@@ -12,7 +12,7 @@ public class FeeB extends FixedPeriodFee {
 	}
 
 	@Override
-	public BigDecimal calculate(BigDecimal amount) {
+	public BigDecimal getValue(BigDecimal amount) {
 		validateAmount(amount);
 		return amount.multiply(percentTax.divide(new BigDecimal(100)));
 	}

@@ -1,7 +1,6 @@
 package com.thiago.scheduler.fee;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public class FeeA extends FixedPeriodFee {
 
@@ -9,7 +8,7 @@ public class FeeA extends FixedPeriodFee {
 	private final BigDecimal percentTax = new BigDecimal(3);
 
 	@Override
-	public BigDecimal calculate(BigDecimal amount) {
+	public BigDecimal getValue(BigDecimal amount) {
 		validateAmount(amount);
 		return amount
 				.multiply(percentTax.divide(new BigDecimal(100)))

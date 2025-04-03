@@ -12,7 +12,7 @@ public class FeeBTest {
 	@Test
 	public void shouldCalculateFeeEqualToo9() {
 		FeeB feeB = new FeeB();
-		BigDecimal feeToPay = feeB.calculate(new BigDecimal(100));
+		BigDecimal feeToPay = feeB.getValue(new BigDecimal(100));
 
 		assertEquals(new BigDecimal("9.00"), feeToPay);
 	}
@@ -20,14 +20,14 @@ public class FeeBTest {
 	@Test
 	public void shouldNotCalculateForNullAmount() {
 		FeeB feeB = new FeeB();
-		Assertions.assertThrows(IllegalArgumentException.class, () -> feeB.calculate(null));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> feeB.getValue(null));
 	}
 
 	@Test
 	void shouldNotCalculateForNegativeAmount() {
 		FeeB feeB = new FeeB();
 		BigDecimal amount = new BigDecimal(-100);
-		Assertions.assertThrows(IllegalArgumentException.class, () -> feeB.calculate(amount));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> feeB.getValue(amount));
 	}
 
 	@Test
@@ -36,7 +36,7 @@ public class FeeBTest {
 
 		BigDecimal amount = new BigDecimal("50.50");
 		BigDecimal expected = new BigDecimal("4.545");
-		BigDecimal actual = feeB.calculate(amount);
+		BigDecimal actual = feeB.getValue(amount);
 		assertEquals(expected.setScale(3, BigDecimal.ROUND_HALF_UP), actual.setScale(3, BigDecimal.ROUND_HALF_UP));
 	}
 
