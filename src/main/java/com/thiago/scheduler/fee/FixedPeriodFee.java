@@ -5,6 +5,12 @@ import java.util.Objects;
 
 public abstract class FixedPeriodFee implements FeeCalculator {
 
+	protected final int daysBetween;
+
+	public FixedPeriodFee(int daysBetween) {
+		this.daysBetween = daysBetween;
+	}
+
 	@Override
 	public BigDecimal getValue(BigDecimal amount) {
 		return BigDecimal.ZERO;
