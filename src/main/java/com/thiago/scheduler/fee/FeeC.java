@@ -19,6 +19,7 @@ public class FeeC extends PeriodDependentFee {
 
 	@Override
 	public BigDecimal getValue(BigDecimal amount) {
+		validateAmount(amount);
 		return amount
 				.multiply(percentTax.divide(new BigDecimal(100)))
 				.setScale(2, RoundingMode.HALF_UP);
