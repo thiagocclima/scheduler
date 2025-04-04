@@ -50,4 +50,15 @@ public class TransactionService {
 	public void delete(Long id) {
 		transactionRepository.deleteById(id);
 	}
+
+	public void update(Long id, Transaction transaction) throws NotFoundException {
+		TransactionEntity entity = transactionRepository.findById(id).orElseThrow(() -> new NotFoundException());
+		entity.setAmount(transaction.getAmount());
+		entity.setDate(transaction.getDate());
+		entity.setPercentTax(transaction.getPercentTax());
+		entity.setFeeValue(transaction.getFeeValue());
+		entity.setTotal(transaction.getTotal());
+
+		transactionRepository.save(entity);
+	}
 }

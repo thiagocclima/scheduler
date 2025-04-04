@@ -3,7 +3,9 @@ package com.thiago.scheduler.transaction;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.thiago.scheduler.fee.FeeCalculator;
 import com.thiago.scheduler.fee.FeeCalculatorFactory;
@@ -14,6 +16,7 @@ import lombok.Getter;
 public class Transaction {
 	private final Long id;
 	private final BigDecimal amount;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private final LocalDate date;
 	private final BigDecimal percentTax;
 	private final BigDecimal feeValue;
@@ -47,7 +50,7 @@ public class Transaction {
 
 	private static int getDaysBetween(LocalDate date) {
 		LocalDate today = LocalDate.now();
-		Period period = Period.between(today, date);
-		return period.getDays();
+		Long days = ChronoUnit.DAYS.between(today, date);
+		return days.intValue();
 	}
 }
