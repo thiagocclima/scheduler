@@ -2,7 +2,6 @@ package com.thiago.scheduler.transaction;
 
 import java.util.List;
 
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -46,5 +45,9 @@ public class TransactionService {
 				.orElseThrow(() -> new NotFoundException());
 		return Transaction.createTransaction(entity.getId(), entity.getAmount(), entity.getDate(),
 				entity.getPercentTax(), entity.getFeeValue(), entity.getTotal());
+	}
+
+	public void delete(Long id) {
+		transactionRepository.deleteById(id);
 	}
 }
